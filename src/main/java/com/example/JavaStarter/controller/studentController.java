@@ -10,6 +10,7 @@ import com.example.JavaStarter.service.subjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,6 +103,22 @@ public class studentController {
     @GetMapping("/students")
     public ResponseEntity<Page<Student>> getStudents(Pageable pageable){
        return studentService.getStudentByPagination(pageable);
+    }
+
+    @GetMapping("/student/subject-count")
+    public ResponseEntity<?> countSubjectPerStudent(){
+        return studentService.getStudentBySubjectCount();
+    }
+
+
+    @GetMapping("/student/multi-club")
+    public ResponseEntity<?> getStudentsInMultiClub(@RequestParam Integer count){
+        return studentService.getStudentsInMultiClub(count);
+    }
+
+    @GetMapping("/student/summary/{id}")
+    public ResponseEntity<?> getStudentSummary(@PathVariable Integer id){
+        return studentService.getStudentSummary(id);
     }
 
 }

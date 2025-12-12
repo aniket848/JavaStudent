@@ -5,11 +5,9 @@ import com.example.JavaStarter.service.subjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/subject")
 public class subjectController {
 
@@ -26,4 +24,10 @@ public class subjectController {
     public ResponseEntity<?> deleteStudent(@PathVariable Integer subjectId){
         return subjectService.deleteSubject(subjectId);
     }
+
+    @GetMapping("/student")
+    public ResponseEntity<?> getStudentBySubject(@RequestParam String subjectName){
+       return subjectService.getStudentBySubjectName(subjectName);
+    }
+
 }

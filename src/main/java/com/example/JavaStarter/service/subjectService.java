@@ -79,4 +79,15 @@ public class subjectService {
         subjectRepo.deleteById(subjectId);
         return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted");
     }
+
+    public ResponseEntity<?> getStudentBySubjectName(String subjectName) {
+
+       List<Student> studentList = subjectRepo.getStudentBySubjectName(subjectName);
+       if(studentList.isEmpty()){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO student study subject named "+subjectName);
+
+       }
+
+       return ResponseEntity.status(HttpStatus.OK).body(studentList);
+    }
 }

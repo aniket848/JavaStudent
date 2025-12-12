@@ -79,4 +79,14 @@ public class clubService {
         return ResponseEntity.status(HttpStatus.OK).body(savedStudent);
 
     }
+
+    public ResponseEntity<?> getFilterClubs(Integer days) {
+        List<Clubs> clubList = clubRepo.getFilterClubs(days);
+
+        if(clubList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No club found having practice days greater than "+ days +" days");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(clubList);
+    }
 }
